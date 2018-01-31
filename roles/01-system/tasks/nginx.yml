@@ -5,13 +5,6 @@
     name: nginx
     state: present
 
-- name: Start and enable nginx
-  become: true
-  service:
-    name: nginx
-    state: started
-    enabled: true
-
 - name: OCSP Response Folder
   become: true
   file:
@@ -46,3 +39,10 @@
     - goatberger.cyber-perikarp.eu
   notify:
     - restart nginx
+
+- name: Start and enable nginx
+  become: true
+  service:
+    name: nginx
+    state: started
+    enabled: true
