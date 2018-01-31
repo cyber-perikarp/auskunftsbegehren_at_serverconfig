@@ -17,10 +17,10 @@
     path: /etc/ssl/dh
     state: directory
 
-- name: OSCP Response Folder
+- name: OCSP Response Folder
   become: true
   file:
-    path: /etc/ssl/oscp
+    path: /etc/ssl/ocsp
     state: directory
 
 - name: Install security tools
