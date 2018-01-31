@@ -11,5 +11,5 @@ function stapler() {
 
 cd /etc/letsencrypt/live
 for name in *; do
-  stapler "/etc/ssl/letsencryptauthorityx3.pem" "/etc/letsencrypt/live/$name/cert.pem" "$name"
+  stapler "/etc/letsencrypt/live/$name/ca.pem" "/etc/letsencrypt/live/$name/cert.pem" "$name"
 done
