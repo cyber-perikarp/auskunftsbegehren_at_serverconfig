@@ -12,6 +12,12 @@
     state: started
     enabled: true
 
+- name: OCSP Response Folder
+  become: true
+  file:
+    path: /etc/ssl/vhosts.d
+    state: directory
+
 - name: Copy nginx config
   become: true
   template:
