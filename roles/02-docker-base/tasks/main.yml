@@ -1,6 +1,7 @@
 ---
 - name: Create new bridge
   become: true
+  ignore_errors: true
   docker_network:
     name: defaultnet
     driver_options:
