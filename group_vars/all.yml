@@ -3,4 +3,5 @@ ntp_1: "at.pool.ntp.org"
 ntp_2: "de.pool.ntp.org"
 ntp_3: "ch.pool.ntp.org"
 
-include_vars: "passwords.yml"
+admin_email: "sebastian.pfeifer@unicorncloud.org"
+mail_user: "daemon@goatberger.cyber-perikarp.eu"
