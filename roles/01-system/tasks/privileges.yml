@@ -18,7 +18,6 @@
   user:
     name: "{{ item }}"
     groups: remote,sudo
-    shell: /usr/bin/zsh
     append: true
   with_items:
     - remotebackup

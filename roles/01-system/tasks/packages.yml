@@ -5,13 +5,7 @@
     name: "{{ item }}"
     state: present
   with_items:
-    - git
     - vim
-    - python-pip
-    - zsh
-    - tmux
-    - figlet
-    - fortune
     - gnupg-agent
     - htop
     - qemu-guest-agent
