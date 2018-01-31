@@ -11,3 +11,32 @@
     name: nginx
     state: started
     enabled: true
+
+- name: Copy nginx config
+  become: true
+  template:
+    src: templates/etc/nginx/nginx.conf
+    dest: /etc/nginx/nginx.conf
+  notify:
+    - restart nginx
+
+- name: Copy nginx additional config
+  become: true
+  template:
+    src: "templates/etc/nginx/conf.d/{{ item }}.conf"
+    dest: "/etc/nginx/conf.d/{{ item }}.conf"
+  with_items:
+    - folder
+    - tls
+  notify:
+    - restart nginx
+
+- name: Copy nginx vhost config
+  become: true
+  template:
+    src: "templates/etc/nginx/vhosts.d/{{ item }}.conf"
+    dest: "/etc/nginx/vhosts.d/{{ item }}.conf"
+  with_items:
+    - goatberger.cyber-perikarp.eu
+  notify:
+    - restart nginx
