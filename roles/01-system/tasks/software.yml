@@ -1,0 +1,28 @@
+---
+- name: Deploy timesyncd config
+  become: true
+  template:
+    src: templates/etc/systemd/timesyncd.conf
+    dest: /etc/systemd/timesyncd.conf
+
+- name: Copy Cronjobs
+  become: true
+  copy:
+    src: "templates/etc/cron.d/{{ item }}"
+    dest: "/etc/cron.d/{{ item }}"
+  with_items:
+    - "update-ssl"
+    - "update-dh"
+    - "update-stapling"
+    - "sync-skel-userdir"
+
+- name: Copy some additional Software
+  become: true
+  copy:
+    src: "templates/opt/{{ item }}"
+    dest: "/opt/{{ item }}"
+  with_items:
+    - sync-skel-userdir.sh
+    - update-ssl.sh
+    - update-dh.sh
+    - update-stapling.sh

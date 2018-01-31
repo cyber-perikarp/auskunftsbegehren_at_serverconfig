@@ -1,0 +1,7 @@
+---
+- include: locale.yml
+- include: packages.yml
+- include: privileges.yml
+- include: repos.yml
+- include: security.yml
+- include: software.yml

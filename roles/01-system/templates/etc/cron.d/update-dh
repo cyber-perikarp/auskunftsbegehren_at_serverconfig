@@ -1,0 +1,1 @@
+15 0 * * * root bash /opt/update-dh.sh > /dev/null 2>&1

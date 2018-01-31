@@ -1,0 +1,56 @@
+---
+- name: Add group for ssh users
+  become: true
+  group:
+    name: remote
+    state: present
+
+- name: Add deploy user to ssh user group
+  become: true
+  user:
+    name: deploy
+    groups: remote,sudo
+    shell: /bin/bash
+    append: true
+
+- name: Add users that are allowed to login via ssh
+  become: true
+  user:
+    name: "{{ item }}"
+    groups: remote,sudo
+    shell: /usr/bin/zsh
+    append: true
+  with_items:
+    - remotebackup
+    - seder
+    - spfeifer
+
+- name: Deploy sudoers file
+  become: true
+  copy:
+    src: templates/etc/sudoers
+    dest: /etc/sudoers
+
+- name: Set authorized key for spfeifer
+  become: true
+  authorized_key:
+    user: spfeifer
+    state: present
+    exclusive: true
+    key: https://raw.githubusercontent.com/deadda7a/ssh_keys/master/pubkeys
+
+- name: Set authorized key for remotebackup
+  become: true
+  authorized_key:
+    user: remotebackup
+    state: present
+    exclusive: true
+    key: https://raw.githubusercontent.com/deadda7a/ssh_keys/master/backups
+
+- name: Set authorized key for seder
+  become: true
+  authorized_key:
+    user: seder
+    state: present
+    exclusive: true
+    key: https://raw.githubusercontent.com/coldice4/public_keys/master/key

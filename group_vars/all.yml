@@ -1,0 +1,4 @@
+# NTP
+ntp_1: "at.pool.ntp.org"
+ntp_2: "de.pool.ntp.org"
+ntp_3: "ch.pool.ntp.org"

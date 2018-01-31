@@ -1,0 +1,6 @@
+---
+- name: system config
+  hosts:
+    - Goatberger
+  roles:
+    - 01-system

@@ -1,0 +1,11 @@
+Defaults        env_reset
+Defaults        mail_badpass
+Defaults        secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"
+Defaults        insults
+
+# Per User rules
+root            ALL=(ALL:ALL) ALL
+remotebackup    ALL=NOPASSWD:/usr/bin/rsync
+
+# Per group rules
+%sudo           ALL=(ALL:ALL) ALL

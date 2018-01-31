@@ -1,0 +1,32 @@
+---
+- name: Generate locales
+  become: true
+  locale_gen:
+    name: "{{ item }}"
+    state: present
+
+  with_items:
+    - de_AT.UTF-8
+    - en_IE.UTF-8
+
+- name: Set locale
+  become: true
+  command: "update-locale LANG=en_IE.UTF-8"
+
+- name: Set time zone
+  become: true
+  file:
+    src: /usr/share/zoneinfo/Europe/Vienna
+    dest: /etc/timezone
+    state: link
+    mode: 0644
+    force: true
+
+- name: Set local time
+  become: true
+  file:
+    src: /usr/share/zoneinfo/Europe/Vienna
+    dest: /etc/localtime
+    state: link
+    mode: 0644
+    force: true
