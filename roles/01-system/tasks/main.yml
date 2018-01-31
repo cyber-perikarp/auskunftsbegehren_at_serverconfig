@@ -5,3 +5,4 @@
 - include: repos.yml
 - include: security.yml
 - include: software.yml
+- include: nginx.yml

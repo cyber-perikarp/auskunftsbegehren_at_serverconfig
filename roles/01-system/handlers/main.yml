@@ -4,3 +4,9 @@
   service:
     name: fail2ban
     state: restarted
+
+- name: "restart nginx"
+  become: true
+  service:
+    name: nginx
+    state: restarted

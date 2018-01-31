@@ -2,7 +2,7 @@
 - name: Create new bridge
   become: true
   docker_network:
-    name: nginxpublic
+    name: defaultnet
     driver_options:
       com.docker.network.bridge.name: dockerbridge0
     ipam_options:
@@ -22,4 +22,4 @@
     ports:
       - 127.0.0.1:9000:9000
     networks:
-    - name: nginxpublic
+    - name: defaultnet
