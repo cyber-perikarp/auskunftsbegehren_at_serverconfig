@@ -26,3 +26,10 @@
     - update-ssl.sh
     - update-dh.sh
     - update-stapling.sh
+
+- name: start and enable docker
+  become: true
+  service:
+    name: docker
+    state: started
+    enabled: true

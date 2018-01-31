@@ -4,3 +4,4 @@
     - Goatberger
   roles:
     - 01-system
+    - 02-docker-base

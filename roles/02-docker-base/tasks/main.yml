@@ -1,0 +1,25 @@
+---
+- name: Create new bridge
+  become: true
+  docker_network:
+    name: nginxpublic
+    driver_options:
+      com.docker.network.bridge.name: dockerbridge0
+    ipam_options:
+      subnet: '172.3.26.0/16'
+      gateway: 172.3.26.1
+
+- name: Start portainer
+  become: true
+  docker_container:
+    name: portainer
+    image: portainer/portainer
+    restart_policy: unless-stopped
+    recreate: true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /opt/docker/portainer:/data
+    ports:
+      - 127.0.0.1:9000:9000
+    networks:
+    - name: nginxpublic
