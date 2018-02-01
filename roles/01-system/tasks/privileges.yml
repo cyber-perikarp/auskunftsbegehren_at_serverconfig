@@ -17,7 +17,7 @@
   become: true
   user:
     name: "{{ item }}"
-    groups: remote,sudo
+    groups: remote,sudo,docker
     append: true
     shell: /bin/bash
   with_items:
