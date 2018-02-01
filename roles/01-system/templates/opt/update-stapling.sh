@@ -13,3 +13,5 @@ cd /etc/letsencrypt/live
 for name in *; do
   stapler "/etc/letsencrypt/live/$name/chain.pem" "/etc/letsencrypt/live/$name/cert.pem" "$name"
 done
+
+service nginx restart
