@@ -19,6 +19,7 @@
     name: "{{ item }}"
     groups: remote,sudo
     append: true
+    shell: /bin/bash
   with_items:
     - remotebackup
     - seder
