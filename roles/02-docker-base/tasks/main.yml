@@ -14,6 +14,7 @@
   become: true
   docker_container:
     name: portainer
+    hostname: portainer
     image: portainer/portainer
     restart_policy: unless-stopped
     recreate: true
@@ -26,6 +27,36 @@
     networks:
     - name: defaultnet
 
-# - name: Start Mailserver
-#   become: true
-#   docker_container
+- name: Start Mailserver
+  become: true
+  docker_container:
+    name: mail
+    hostname: mail.auskunftsbegehren.at
+    image: tvial/docker-mailserver:latest
+    restart_policy: unless-stopped
+    recreate: true
+    purge_networks: true
+    volumes:
+      - /opt/docker/mail/mail:/var/mail
+      - /opt/docker/mail/state:/var/mail-state
+      - /opt/docker/mail/config/:/tmp/docker-mailserver/
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+    ports:
+      - "25:25"
+      - "143:143"
+      - "587:587"
+      - "993:993"
+      - "4190:4190"
+    env:
+      - ENABLE_SPAMASSASSIN=1
+      - ENABLE_CLAMAV=1
+      - ENABLE_FAIL2BAN=1
+      - ENABLE_POSTGREY=1
+      - ENABLE_MANAGESIEVE=1
+      - SSL_TYPE=letsencrypt
+      - ONE_DIR=1
+      - DMS_DEBUG=0
+    capabilities:
+      - NET_ADMIN
+    networks:
+    - name: defaultnet
