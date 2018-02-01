@@ -17,6 +17,7 @@
     image: portainer/portainer
     restart_policy: unless-stopped
     recreate: true
+    purge_networks: true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /opt/docker/portainer:/data
@@ -24,3 +25,7 @@
       - 127.0.0.1:9000:9000
     networks:
     - name: defaultnet
+
+# - name: Start Mailserver
+#   become: true
+#   docker_container

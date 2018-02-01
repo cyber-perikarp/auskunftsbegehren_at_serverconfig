@@ -7,7 +7,6 @@
     state: present
   with_items:
     - 9DC858229FC7DD38854AE2D88D81803C0EBFCD88 # Docker
-    - F1656F24C74CD1D8 # MariaDb
     - ABF5BD827BD9BF62 # Nginx
 
 - name: apt-transport-https
@@ -29,8 +28,6 @@
     state: present
     update_cache: true
   with_items:
-    - 'ppa:ondrej/php'
     - 'ppa:certbot/certbot'
-    - 'deb https://mirror.herrbischoff.com/mariadb/repo/10.2/ubuntu/ xenial main'
     - 'deb http://nginx.org/packages/mainline/ubuntu/ xenial nginx'
     - 'deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable'
