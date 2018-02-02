@@ -67,7 +67,7 @@
   docker_container:
     name: webmail
     hostname: webmail
-    image: hardware/rainloop
+    image: deadda7a/rainloop
     restart_policy: unless-stopped
     recreate: true
     purge_networks: true
