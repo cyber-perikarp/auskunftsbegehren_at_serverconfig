@@ -37,12 +37,12 @@
   become: true
   docker_container:
     name: mail
-    hostname: mail.auskunftsbegehren.at
+    hostname: auskunftsbegehren.at
     image: tvial/docker-mailserver:latest
     restart_policy: unless-stopped
     recreate: true
     purge_networks: true
-    env_file: "/opt/docker/mailserver.env"
+    env_file: /opt/docker/mailserver.env
     volumes:
       - /opt/docker/mail/mail:/var/mail
       - /opt/docker/mail/state:/var/mail-state
@@ -56,5 +56,21 @@
       - "4190:4190"
     capabilities:
       - NET_ADMIN
+    networks:
+    - name: defaultnet
+
+- name: Start webmail
+  become: true
+  docker_container:
+    name: webmail
+    hostname: webmail
+    image: hardware/rainloop
+    restart_policy: unless-stopped
+    recreate: true
+    purge_networks: true
+    volumes:
+      - /opt/docker/mail/webmail:/rainloop/data
+    ports:
+      - "127.0.0.1:8888:8888"
     networks:
     - name: defaultnet

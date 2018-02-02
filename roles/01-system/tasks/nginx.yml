@@ -27,6 +27,7 @@
   with_items:
     - folder
     - tls
+    - proxy
   notify:
     - restart nginx
 
@@ -37,6 +38,7 @@
     dest: "/etc/nginx/vhosts.d/{{ item }}.conf"
   with_items:
     - goatberger.cyber-perikarp.eu
+    - auskunftsbegehren.at
   notify:
     - restart nginx
 
