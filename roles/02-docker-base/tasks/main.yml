@@ -27,11 +27,14 @@
     networks:
     - name: defaultnet
 
-- name: copy mailserver config
+- name: copy envs
   become: true
   copy:
-    src: "templates/opt/docker/mailserver.env"
-    dest: "/opt/docker/mailserver.env"
+    src: "templates/opt/docker/{{ item }}.env"
+    dest: "/opt/docker/{{ item }}.env"
+  with_items:
+    - mailserver
+    - webmail
 
 - name: Start Mailserver
   become: true
@@ -68,6 +71,7 @@
     restart_policy: unless-stopped
     recreate: true
     purge_networks: true
+    # env_file: /opt/docker/webmail.env
     volumes:
       - /opt/docker/mail/webmail:/rainloop/data
     ports:
