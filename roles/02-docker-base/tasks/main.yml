@@ -80,8 +80,8 @@
 - name: Start website
   become: true
   docker_container:
-    name: webmail
-    hostname: webmail
+    name: website
+    hostname: website
     image: deadda7a/auskunftsbegehren_at
     restart_policy: unless-stopped
     recreate: true
