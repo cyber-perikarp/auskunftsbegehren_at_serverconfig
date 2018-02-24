@@ -8,6 +8,14 @@
     - mariadb
     - app
 
+- name: copy build script
+  become: true
+  template:
+    src: "templates/opt/{{ item }}.sh"
+    dest: "/opt/{{ item }}.sh"
+  with_items:
+    - update-app
+
 - name: Start mariadb
   become: true
   docker_container:
@@ -54,7 +62,7 @@
   docker_container:
     name: app
     hostname: auskunftsbegehren.at
-    image: deadda7a/auskunftsbegehren_at:latest
+    image: auskunftsbegehren_at-local
     restart_policy: unless-stopped
     recreate: true
     purge_networks: true
