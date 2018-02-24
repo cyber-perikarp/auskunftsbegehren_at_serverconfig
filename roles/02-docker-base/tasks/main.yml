@@ -50,6 +50,7 @@
       - /opt/docker/mail/state:/var/mail-state
       - /opt/docker/mail/config/:/tmp/docker-mailserver/
       - /etc/letsencrypt:/etc/letsencrypt:ro
+      - /etc/localtime:/etc/localtime:ro
     ports:
       - "25:25"
       - "143:143"
@@ -74,19 +75,5 @@
       - /opt/docker/mail/webmail:/rainloop/data
     ports:
       - "127.0.0.1:8888:8888"
-    networks:
-    - name: defaultnet
-
-- name: Start website
-  become: true
-  docker_container:
-    name: website
-    hostname: website
-    image: deadda7a/auskunftsbegehren_at
-    restart_policy: unless-stopped
-    recreate: true
-    purge_networks: true
-    ports:
-      - "127.0.0.1:8080:80"
     networks:
     - name: defaultnet

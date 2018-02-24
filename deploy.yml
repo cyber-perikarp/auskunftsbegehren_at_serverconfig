@@ -5,3 +5,4 @@
   roles:
     - 01-system
     - 02-docker-base
+    - 03-app
