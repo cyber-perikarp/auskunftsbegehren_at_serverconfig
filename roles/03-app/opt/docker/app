@@ -1,0 +1,4 @@
+HOST=mariadb
+USERNAME=auskunftsbegehren_at
+PASSWORD={{ mysql_app_pw }}
+DATABASE=auskunftsbegehren_at

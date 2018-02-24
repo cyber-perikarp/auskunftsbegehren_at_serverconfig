@@ -1,0 +1,51 @@
+---
+- name: copy envs
+  become: true
+  copy:
+    src: "templates/opt/docker/{{ item }}.env"
+    dest: "/opt/docker/{{ item }}.env"
+  with_items:
+    - mariadb
+    - app
+
+- name: Start mariadb
+  become: true
+  docker_container:
+    name: mariadb
+    hostname: mariadb
+    image: mariadb:latest
+    restart_policy: unless-stopped
+    recreate: true
+    purge_networks: true
+    env_file: /opt/docker/mariadb.env
+    volumes:
+      - /opt/docker/app/mariadb:/var/lib/mysql
+    networks:
+      - name: defaultnet
+
+- name: Start importer
+  become: true
+  docker_container:
+    name: importer
+    hostname: importer
+    image: deadda7a/auskunftsbegehren_at_adressen
+    recreate: true
+    purge_networks: true
+    env_file: /opt/docker/app.env
+    networks:
+      - name: defaultnet
+
+- name: Start app
+  become: true
+  docker_container:
+    name: app
+    hostname: auskunftsbegehren.at
+    image: deadda7a/auskunftsbegehren_at
+    restart_policy: unless-stopped
+    recreate: true
+    purge_networks: true
+    env_file: /opt/docker/app.env
+    ports:
+      - 1337:80
+    networks:
+      - name: defaultnet
