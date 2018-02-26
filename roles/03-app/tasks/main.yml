@@ -8,13 +8,14 @@
     - mariadb
     - app
 
-- name: copy build script
+- name: copy build scripts
   become: true
   template:
     src: "templates/opt/{{ item }}.sh"
     dest: "/opt/{{ item }}.sh"
   with_items:
     - update-app
+    - generator
 
 - name: Start mariadb
   become: true
