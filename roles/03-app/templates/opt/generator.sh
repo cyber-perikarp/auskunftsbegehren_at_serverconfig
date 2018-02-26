@@ -5,6 +5,6 @@ if [ -f $FILE ]; then
    echo "Not running..."
 else
   touch $FILE
-  docker run -t -v /tmp/pdf:/var/pdfStorage --env-file /opt/docker/app.env auskunftsbegehren_at_generator-local
+  docker run -t -v /tmp/pdf:/var/pdfStorage --env-file /opt/docker/app.env --network="defaultnet" auskunftsbegehren_at_generator-local
   rm $FILE
 fi
